@@ -30,7 +30,7 @@ public class ShowQuiz extends AppCompatActivity {
         startquiz_btn = (Button)findViewById(R.id.startquiz_btn);
 
         Toast.makeText(getApplicationContext(), quiz.getTitle(),Toast.LENGTH_SHORT).show();
- //       quizno_txt.setText(quiz.getId());
+        quizno_txt.setText("Quiz No "+Integer.toString(quiz.getId()));
         quiztitle_txt.setText(quiz.getTitle());
         quizdesc_txt.setText(quiz.getDescription());
     }
