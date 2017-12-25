@@ -40,6 +40,15 @@ public class QuizController {
         return null;
     }
 
+    public Quiz getQuiz(String title){
+        try{
+            return (Quiz) new GetQuizTask().execute(title).get();
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
     public class AddQuizTask extends AsyncTask {
         @Override
         protected Object doInBackground(Object[] objects) {
@@ -111,6 +120,45 @@ public class QuizController {
                         quizList.add(quiz);
                     }
                     return quizList;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+
+    public class GetQuizTask extends AsyncTask {
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            String quiz_title = (String)objects[0];
+            String link = "http://10.99.30.62/quizzer/get_quiz.php?title="+quiz_title;
+
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
+                    .url(link)
+                    .build();
+            try {
+                Response response = client.newCall(request).execute();
+                String result = response.body().string();
+
+                JSONObject json = new JSONObject(result);
+
+                int success = json.getInt("success");
+
+                if (success == 0) {
+                    Log.v("response:", json.getString("message"));
+                    return null;
+                } else {
+                    Quiz quiz = new Quiz();
+
+                    //Set quiz object attributes from JSON quiz
+                    quiz.setId(json.getInt("id"));
+                    quiz.setTitle(json.getString("title"));
+                    quiz.setDescription(json.getString("description"));
+
+                    return quiz;
                 }
             } catch (Exception e) {
                 e.printStackTrace();

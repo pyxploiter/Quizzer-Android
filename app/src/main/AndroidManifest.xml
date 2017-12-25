@@ -31,9 +31,9 @@
         <activity android:name=".View.Signup" />
         <activity android:name=".View.StudentIndex" />
         <activity android:name=".View.InstructorIndex" />
-        <activity android:name=".View.SigninActivity" />
         <activity android:name=".View.AddQuiz" />
         <activity android:name=".View.AddQuestion" />
+        <activity android:name=".View.ShowQuiz"></activity>
     </application>
 
 </manifest>
