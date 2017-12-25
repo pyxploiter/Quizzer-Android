@@ -21,7 +21,7 @@ import xploiter_projects.quizzer.Model.Quiz;
  */
 
 public class QuizController {
-
+    //add quiz to database
     public boolean AddQuiz(Quiz quiz){
         try {
             return (boolean) new AddQuizTask().execute(quiz).get();
@@ -31,6 +31,7 @@ public class QuizController {
         return false;
     }
 
+    //get all quizzes from server
     public List<Quiz> getAllQuiz(){
         try{
             return (List<Quiz>) new GetAllQuizTask().execute().get();
@@ -40,6 +41,7 @@ public class QuizController {
         return null;
     }
 
+    //get single quiz from server
     public Quiz getQuiz(String title){
         try{
             return (Quiz) new GetQuizTask().execute(title).get();
@@ -49,6 +51,7 @@ public class QuizController {
         return null;
     }
 
+    //asynchronous task for adding quiz
     public class AddQuizTask extends AsyncTask {
         @Override
         protected Object doInBackground(Object[] objects) {
@@ -81,6 +84,7 @@ public class QuizController {
         }
     }
 
+    //asynchronous task for getting all quizzes from server
     public class GetAllQuizTask extends AsyncTask {
         JSONArray quizzes = null;
 
@@ -128,6 +132,7 @@ public class QuizController {
         }
     }
 
+    //asynchronous task for getting single quiz from title
     public class GetQuizTask extends AsyncTask {
 
         @Override

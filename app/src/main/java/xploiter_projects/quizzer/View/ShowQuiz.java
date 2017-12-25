@@ -20,8 +20,9 @@ public class ShowQuiz extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_quiz);
 
+        //getting selected quiz title from parent activity.
         String selected_quiz = getIntent().getStringExtra("quiz_title");
-        //Toast.makeText(getApplicationContext(), selected_quiz,Toast.LENGTH_SHORT).show();
+
         Quiz quiz = quizController.getQuiz(selected_quiz);
 
         quizno_txt = (TextView)findViewById(R.id.quizno_txt);
@@ -29,7 +30,6 @@ public class ShowQuiz extends AppCompatActivity {
         quizdesc_txt = (TextView)findViewById(R.id.quizdesc_txt);
         startquiz_btn = (Button)findViewById(R.id.startquiz_btn);
 
-        Toast.makeText(getApplicationContext(), quiz.getTitle(),Toast.LENGTH_SHORT).show();
         quizno_txt.setText("Quiz No "+Integer.toString(quiz.getId()));
         quiztitle_txt.setText(quiz.getTitle());
         quizdesc_txt.setText(quiz.getDescription());
