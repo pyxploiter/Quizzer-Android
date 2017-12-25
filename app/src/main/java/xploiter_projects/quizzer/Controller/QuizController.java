@@ -21,7 +21,7 @@ import xploiter_projects.quizzer.Model.Quiz;
  */
 
 public class QuizController {
-
+    //add quiz to database
     public boolean AddQuiz(Quiz quiz){
         try {
             return (boolean) new AddQuizTask().execute(quiz).get();
@@ -31,6 +31,7 @@ public class QuizController {
         return false;
     }
 
+    //get all quizzes from server
     public List<Quiz> getAllQuiz(){
         try{
             return (List<Quiz>) new GetAllQuizTask().execute().get();
@@ -40,6 +41,17 @@ public class QuizController {
         return null;
     }
 
+    //get single quiz from server
+    public Quiz getQuiz(String title){
+        try{
+            return (Quiz) new GetQuizTask().execute(title).get();
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    //asynchronous task for adding quiz
     public class AddQuizTask extends AsyncTask {
         @Override
         protected Object doInBackground(Object[] objects) {
@@ -72,6 +84,7 @@ public class QuizController {
         }
     }
 
+    //asynchronous task for getting all quizzes from server
     public class GetAllQuizTask extends AsyncTask {
         JSONArray quizzes = null;
 
@@ -111,6 +124,46 @@ public class QuizController {
                         quizList.add(quiz);
                     }
                     return quizList;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+
+    //asynchronous task for getting single quiz from title
+    public class GetQuizTask extends AsyncTask {
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            String quiz_title = (String)objects[0];
+            String link = "http://10.99.30.62/quizzer/get_quiz.php?title="+quiz_title;
+
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
+                    .url(link)
+                    .build();
+            try {
+                Response response = client.newCall(request).execute();
+                String result = response.body().string();
+
+                JSONObject json = new JSONObject(result);
+
+                int success = json.getInt("success");
+
+                if (success == 0) {
+                    Log.v("response:", json.getString("message"));
+                    return null;
+                } else {
+                    Quiz quiz = new Quiz();
+
+                    //Set quiz object attributes from JSON quiz
+                    quiz.setId(json.getInt("id"));
+                    quiz.setTitle(json.getString("title"));
+                    quiz.setDescription(json.getString("description"));
+
+                    return quiz;
                 }
             } catch (Exception e) {
                 e.printStackTrace();

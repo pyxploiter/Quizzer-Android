@@ -3,7 +3,6 @@ package xploiter_projects.quizzer.Controller;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import okhttp3.OkHttpClient;
