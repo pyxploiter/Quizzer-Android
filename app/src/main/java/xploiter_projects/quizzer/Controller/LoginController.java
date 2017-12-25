@@ -32,10 +32,10 @@ public class LoginController extends AsyncTask {
             int success = json.getInt("success");
 
             if (success == 0){
-                Log.v("response:",json.getString("message"));
+                Log.v("failure:",json.getString("message"));
                 return new Boolean(false);
             } else {
-                Log.v("response",json.getString("message"));
+                Log.v("success",json.getString("message"));
                 return new Boolean(true);
             }
         } catch (Exception e) {
