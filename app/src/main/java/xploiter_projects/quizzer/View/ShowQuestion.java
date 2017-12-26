@@ -39,15 +39,15 @@ public class ShowQuestion extends AppCompatActivity {
 
         List<Question> questions = quizController.getAllQuestion(quiz_id);
 
-        question_txt = (TextView)findViewById(R.id.question_inp);
+        question_txt = (TextView)findViewById(R.id.question_txt);
         option1_rbtn = (RadioButton)findViewById(R.id.option1_rbtn);
         option2_rbtn = (RadioButton)findViewById(R.id.option2_rbtn);
         option3_rbtn = (RadioButton)findViewById(R.id.option3_rbtn);
         option4_rbtn = (RadioButton)findViewById(R.id.option4_rbtn);
         numeric_answer_inp = (EditText) findViewById(R.id.numeric_answer_inp);
-        submitAns_btn = (Button)findViewById(R.id.submitQuiz_btn);
+        submitAns_btn = (Button)findViewById(R.id.submitAns_btn);
 
-        Log.v(question_no_str,"error");
+
         try {
             Question question = questions.get(question_no);
             question_txt.setText(question.getQuestion());
@@ -56,11 +56,13 @@ public class ShowQuestion extends AppCompatActivity {
                 option2_rbtn.setText(question.getOption2());
                 option3_rbtn.setText(question.getOption3());
                 option4_rbtn.setText(question.getOption4());
+                numeric_answer_inp.setVisibility(View.INVISIBLE);
             } else if (question.getQuestionType().equals("True/False")) {
                 option1_rbtn.setText(question.getOption1());
                 option2_rbtn.setText(question.getOption2());
                 option3_rbtn.setVisibility(View.INVISIBLE);
                 option4_rbtn.setVisibility(View.INVISIBLE);
+                numeric_answer_inp.setVisibility(View.INVISIBLE);
             } else {
                 option1_rbtn.setVisibility(View.INVISIBLE);
                 option2_rbtn.setVisibility(View.INVISIBLE);
