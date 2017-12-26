@@ -9,52 +9,78 @@
 
     <EditText
         android:id="@+id/question_inp"
-        android:layout_width="354dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="22dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="16dp"
+        android:focusedByDefault="true"
         android:hint="Type question here"
         android:inputType="text"
+        android:selectAllOnFocus="false"
         android:shadowColor="@color/colorPrimary"
         android:textAlignment="textStart"
         android:textColorHint="#747474"
         android:textColorLink="@android:color/darker_gray"
-        tools:layout_editor_absoluteX="15dp"
-        tools:layout_editor_absoluteY="16dp" />
+        app:layout_constraintBottom_toTopOf="@+id/add_question_tabHost"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/answer_inp"
-        android:layout_width="354dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
         android:hint="Type correct answer here"
         android:inputType="text"
         android:shadowColor="@color/colorPrimary"
         android:textAlignment="textStart"
         android:textColorHint="#747474"
         android:textColorLink="@android:color/darker_gray"
-        tools:layout_editor_absoluteX="15dp"
-        tools:layout_editor_absoluteY="385dp" />
+        app:layout_constraintBottom_toTopOf="@+id/submitQuiz_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_question_tabHost" />
 
     <Button
         android:id="@+id/addNewQuestion_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="20dp"
         android:text="Add New Question"
-        tools:layout_editor_absoluteX="47dp"
-        tools:layout_editor_absoluteY="447dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/submitQuiz_btn"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/submitQuiz_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="2dp"
         android:text="Submit Quiz"
-        tools:layout_editor_absoluteX="224dp"
-        tools:layout_editor_absoluteY="447dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/addNewQuestion_btn"
+        app:layout_constraintTop_toBottomOf="@+id/answer_inp" />
 
     <TabHost
         android:id="@+id/add_question_tabHost"
-        android:layout_width="350dp"
-        android:layout_height="229dp"
-        tools:layout_editor_absoluteX="17dp"
-        tools:layout_editor_absoluteY="84dp">
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="72dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginStart="17dp"
+        app:layout_constraintBottom_toTopOf="@+id/answer_inp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/question_inp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -141,6 +167,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:checked="false"
+                            android:focusable="auto"
                             android:text="True" />
 
                         <RadioButton

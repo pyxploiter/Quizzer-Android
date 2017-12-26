@@ -16,6 +16,10 @@ public class Question {
     public String expectedAnswer;
 
     public Question(){
+        option1 = "";
+        option2 = "";
+        option3 = "";
+        option4 = "";
     }
 
     //Setters

@@ -110,19 +110,6 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/numeric_txt"
-                        style="@style/editTextStyle"
-                        android:layout_width="353dp"
-                        android:layout_height="wrap_content"
-                        android:inputType="text"
-                        android:shadowColor="@color/colorPrimary"
-                        android:text="Numeric Question."
-                        android:textAlignment="textStart"
-                        android:textColorHint="#747474"
-                        android:textColorLink="@android:color/darker_gray"
-                        tools:layout_editor_absoluteX="16dp"
-                        tools:layout_editor_absoluteY="16dp" />
                 </LinearLayout>
             </FrameLayout>
         </LinearLayout>

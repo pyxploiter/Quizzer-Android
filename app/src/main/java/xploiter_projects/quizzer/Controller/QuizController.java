@@ -12,6 +12,7 @@ import java.util.List;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import xploiter_projects.quizzer.Model.Question;
 import xploiter_projects.quizzer.Model.Quiz;
 
 /**
@@ -23,6 +24,15 @@ public class QuizController {
     public boolean AddQuiz(Quiz quiz){
         try {
             return (boolean) new AddQuizTask().execute(quiz).get();
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean AddQuestion(Question question, int quiz_id){
+        try{
+            return (boolean) new AddQuestionTask().execute(question, quiz_id).get();
         } catch (Exception ex){
             ex.printStackTrace();
         }
@@ -56,6 +66,40 @@ public class QuizController {
             Quiz quiz = (Quiz) objects[0];
             String link = "http://10.99.0.116/quizzer/add_quiz.php?id=" + quiz.getId() + "&title=" + quiz.getTitle() + "&description=" + quiz.getDescription();
             //Log.v("link", link);
+
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
+                    .url(link)
+                    .build();
+            try {
+                Response response = client.newCall(request).execute();
+                String result = response.body().string();
+                JSONObject json = new JSONObject(result);
+
+                int success = json.getInt("success");
+
+                if (success == 0) {
+                    Log.v("response:", json.getString("message"));
+                    return new Boolean(false);
+                } else {
+                    Log.v("response", json.getString("message"));
+                    return new Boolean(true);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+
+    //asynchronous task for adding question
+    public class AddQuestionTask extends AsyncTask {
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            Question question = (Question) objects[0];
+            int quiz_id = (int)objects[1];
+            String link = "http://10.99.0.116/quizzer/add_question.php?quiz_id="+quiz_id+"&question="+question.getQuestion()+"&question_type="+question.getQuestionType()+"&option1="+question.getOption1()+"&option2="+question.getOption2()+"&option3="+question.getOption3()+"&option4="+question.getOption4()+"&expected_answer="+question.getExpectedAnswer();
+            Log.v("link", link);
 
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
