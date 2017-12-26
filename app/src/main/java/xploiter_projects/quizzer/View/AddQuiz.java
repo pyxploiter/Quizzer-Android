@@ -41,6 +41,7 @@ public class AddQuiz extends AppCompatActivity {
                 //boolean flag = (boolean) new QuizController().execute(quiz).get();
 
                 Intent intent=new Intent(AddQuiz.this,AddQuestion.class);
+                intent.putExtra("quiz_id", quizid_inp.getText().toString());
                 startActivity(intent);
             }
         });

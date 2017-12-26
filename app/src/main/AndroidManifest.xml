@@ -33,7 +33,9 @@
         <activity android:name=".View.InstructorIndex" />
         <activity android:name=".View.AddQuiz" />
         <activity android:name=".View.AddQuestion" />
-        <activity android:name=".View.ShowQuiz"></activity>
+        <activity android:name=".View.ShowQuiz" />
+        <activity android:name=".View.AttemptQuiz" />
+        <activity android:name=".View.ShowQuestion"></activity>
     </application>
 
 </manifest>

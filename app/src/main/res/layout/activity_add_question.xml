@@ -4,6 +4,164 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="xploiter_projects.quizzer.View.AddQuestion">
+    tools:context="xploiter_projects.quizzer.View.AddQuestion"
+    tools:layout_editor_absoluteY="81dp">
+
+    <EditText
+        android:id="@+id/question_inp"
+        android:layout_width="354dp"
+        android:layout_height="wrap_content"
+        android:hint="Type question here"
+        android:inputType="text"
+        android:shadowColor="@color/colorPrimary"
+        android:textAlignment="textStart"
+        android:textColorHint="#747474"
+        android:textColorLink="@android:color/darker_gray"
+        tools:layout_editor_absoluteX="15dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <EditText
+        android:id="@+id/answer_inp"
+        android:layout_width="354dp"
+        android:layout_height="wrap_content"
+        android:hint="Type correct answer here"
+        android:inputType="text"
+        android:shadowColor="@color/colorPrimary"
+        android:textAlignment="textStart"
+        android:textColorHint="#747474"
+        android:textColorLink="@android:color/darker_gray"
+        tools:layout_editor_absoluteX="15dp"
+        tools:layout_editor_absoluteY="385dp" />
+
+    <Button
+        android:id="@+id/addNewQuestion_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add New Question"
+        tools:layout_editor_absoluteX="47dp"
+        tools:layout_editor_absoluteY="447dp" />
+
+    <Button
+        android:id="@+id/submitQuiz_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit Quiz"
+        tools:layout_editor_absoluteX="224dp"
+        tools:layout_editor_absoluteY="447dp" />
+
+    <TabHost
+        android:id="@+id/add_question_tabHost"
+        android:layout_width="350dp"
+        android:layout_height="229dp"
+        tools:layout_editor_absoluteX="17dp"
+        tools:layout_editor_absoluteY="84dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/mcq_tab"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/option1_inp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="option 1"
+                        android:inputType="text"
+                        android:shadowColor="@color/colorPrimary"
+                        android:textAlignment="textStart"
+                        android:textColorHint="#747474"
+                        android:textColorLink="@android:color/darker_gray" />
+
+                    <EditText
+                        android:id="@+id/option2_inp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="option 2"
+                        android:inputType="text"
+                        android:shadowColor="@color/colorPrimary"
+                        android:textAlignment="textStart"
+                        android:textColorHint="#747474"
+                        android:textColorLink="@android:color/darker_gray" />
+
+                    <EditText
+                        android:id="@+id/option3_inp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="option 3"
+                        android:inputType="text"
+                        android:shadowColor="@color/colorPrimary"
+                        android:textAlignment="textStart"
+                        android:textColorHint="#747474"
+                        android:textColorLink="@android:color/darker_gray" />
+
+                    <EditText
+                        android:id="@+id/option4_inp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="option 4"
+                        android:inputType="text"
+                        android:shadowColor="@color/colorPrimary"
+                        android:textAlignment="textStart"
+                        android:textColorHint="#747474"
+                        android:textColorLink="@android:color/darker_gray" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/tf_tab"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <RadioButton
+                            android:id="@+id/tf_option1_rbtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="True" />
+
+                        <RadioButton
+                            android:id="@+id/tf_option2_rbtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="False" />
+
+                    </RadioGroup>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/numeric_tab"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+    </TabHost>
 
 </android.support.constraint.ConstraintLayout>
