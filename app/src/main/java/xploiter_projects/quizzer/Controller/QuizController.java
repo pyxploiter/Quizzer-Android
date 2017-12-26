@@ -59,6 +59,15 @@ public class QuizController {
         return null;
     }
 
+    public List<Question> getAllQuestion(int quiz_id){
+        try{
+            return (List<Question>)new GetAllQuestionTask().execute(quiz_id).get();
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
     //asynchronous task for adding quiz
     public class AddQuizTask extends AsyncTask {
         @Override
@@ -166,6 +175,59 @@ public class QuizController {
                         quizList.add(quiz);
                     }
                     return quizList;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+
+    //asynchronous task for getting all quizzes from server
+    public class GetAllQuestionTask extends AsyncTask {
+        JSONArray questionsJsonArray = null;
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            int quiz_id = (int)objects[0];
+            String link = "http://10.99.0.116/quizzer/get_all_question.php?quiz_id="+quiz_id;
+
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
+                    .url(link)
+                    .build();
+            try {
+                Response response = client.newCall(request).execute();
+                String result = response.body().string();
+
+                JSONObject json = new JSONObject(result);
+
+                int success = json.getInt("success");
+
+                if (success == 0) {
+                    Log.v("response:", json.getString("message"));
+                    return null;
+                } else {
+                    List<Question> questionList = new ArrayList<Question>();
+                    questionsJsonArray = json.getJSONArray("questions");
+
+                    for (int i=0; i < questionsJsonArray.length(); i++){
+                        JSONObject questionJson = questionsJsonArray.getJSONObject(i);
+                        Question question = new Question();
+
+                        //Set quiz object attributes from JSON quiz
+                        question.setQuestion(questionJson.getString("question"));
+                        question.setQuestionType(questionJson.getString("question_type"));
+                        question.setOption1(questionJson.getString("option1"));
+                        question.setOption2(questionJson.getString("option2"));
+                        question.setOption3(questionJson.getString("option3"));
+                        question.setOption4(questionJson.getString("option4"));
+                        question.setExpectedAnswer(questionJson.getString("expected_answer"));
+
+                        //add quiz into List of Quiz
+                        questionList.add(question);
+                    }
+                    return questionList;
                 }
             } catch (Exception e) {
                 e.printStackTrace();
