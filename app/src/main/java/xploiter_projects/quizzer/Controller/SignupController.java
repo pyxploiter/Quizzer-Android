@@ -21,7 +21,7 @@ public class SignupController extends AsyncTask {
     @Override
     protected Object doInBackground(Object[] objects) {
         User user = (User)objects[0];
-        String link = "http://10.99.30.62/quizzer/signup.php?username="+user.getUserName()+"& type="+user.getType()+"&email="+user.getEmail()+"&password="+user.getPassword();
+        String link = "http://10.99.0.116/quizzer/signup.php?username="+user.getUserName()+"& type="+user.getType()+"&email="+user.getEmail()+"&password="+user.getPassword();
 
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()

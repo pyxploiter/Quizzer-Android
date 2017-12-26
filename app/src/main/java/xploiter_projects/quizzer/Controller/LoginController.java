@@ -19,7 +19,7 @@ public class LoginController extends AsyncTask {
 
     @Override
     protected Object doInBackground(Object[] objects) {
-        String link = "http://10.99.30.62/quizzer/login.php?username="+(String)objects[0]+"& password="+(String)objects[1]+"&type="+(String)objects[2];
+        String link = "http://10.99.0.116/quizzer/login.php?username="+(String)objects[0]+"& password="+(String)objects[1]+"&type="+(String)objects[2];
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
                 .url(link)

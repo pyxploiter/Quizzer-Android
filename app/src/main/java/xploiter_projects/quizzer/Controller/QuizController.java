@@ -2,12 +2,10 @@ package xploiter_projects.quizzer.Controller;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,7 +54,7 @@ public class QuizController {
         @Override
         protected Object doInBackground(Object[] objects) {
             Quiz quiz = (Quiz) objects[0];
-            String link = "http://10.99.30.62/quizzer/add_quiz.php?id=" + quiz.getId() + "&title=" + quiz.getTitle() + "&description=" + quiz.getDescription();
+            String link = "http://10.99.0.116/quizzer/add_quiz.php?id=" + quiz.getId() + "&title=" + quiz.getTitle() + "&description=" + quiz.getDescription();
             //Log.v("link", link);
 
             OkHttpClient client = new OkHttpClient();
@@ -90,7 +88,7 @@ public class QuizController {
 
         @Override
         protected Object doInBackground(Object[] objects) {
-            String link = "http://10.99.30.62/quizzer/get_all_quiz.php";
+            String link = "http://10.99.0.116/quizzer/get_all_quiz.php";
 
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
@@ -138,7 +136,7 @@ public class QuizController {
         @Override
         protected Object doInBackground(Object[] objects) {
             String quiz_title = (String)objects[0];
-            String link = "http://10.99.30.62/quizzer/get_quiz.php?title="+quiz_title;
+            String link = "http://10.99.0.116/quizzer/get_quiz.php?title="+quiz_title;
 
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
