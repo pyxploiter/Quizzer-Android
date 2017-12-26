@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="xploiter_projects.quizzer.View.ShowQuestion"
+    tools:layout_editor_absoluteY="81dp">
+
+    <TextView
+        android:id="@+id/question_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="68dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="104dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginStart="11dp"
+        app:layout_constraintBottom_toTopOf="@+id/submitAns_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/question_txt">
+
+        <RadioButton
+            android:id="@+id/option1_rbtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="option1" />
+
+        <RadioButton
+            android:id="@+id/option2_rbtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="option2" />
+
+        <RadioButton
+            android:id="@+id/option3_rbtn"
+            android:layout_width="362dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="option3" />
+
+        <RadioButton
+            android:id="@+id/option4_rbtn"
+            android:layout_width="match_parent"
+            android:layout_height="21dp"
+            android:layout_weight="1"
+            android:text="option4" />
+
+    </RadioGroup>
+
+
+    <EditText
+        android:id="@+id/numeric_answer_inp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="62dp"
+        android:focusedByDefault="true"
+        android:hint="Type answer here here"
+        android:inputType="text"
+        android:selectAllOnFocus="false"
+        android:shadowColor="@color/colorPrimary"
+        android:textAlignment="textStart"
+        android:textColorHint="#747474"
+        android:textColorLink="@android:color/darker_gray"
+        app:layout_constraintStart_toStartOf="@+id/radioGroup"
+        app:layout_constraintTop_toTopOf="@+id/radioGroup" />
+
+    <Button
+        android:id="@+id/submitAns_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="35dp"
+        android:text="Submit Answer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+</android.support.constraint.ConstraintLayout>

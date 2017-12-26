@@ -2,18 +2,17 @@ package xploiter_projects.quizzer.Controller;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import xploiter_projects.quizzer.Model.Question;
 import xploiter_projects.quizzer.Model.Quiz;
 
 /**
@@ -25,6 +24,15 @@ public class QuizController {
     public boolean AddQuiz(Quiz quiz){
         try {
             return (boolean) new AddQuizTask().execute(quiz).get();
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean AddQuestion(Question question, int quiz_id){
+        try{
+            return (boolean) new AddQuestionTask().execute(question, quiz_id).get();
         } catch (Exception ex){
             ex.printStackTrace();
         }
@@ -51,13 +59,56 @@ public class QuizController {
         return null;
     }
 
+    public List<Question> getAllQuestion(int quiz_id){
+        try{
+            return (List<Question>)new GetAllQuestionTask().execute(quiz_id).get();
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
     //asynchronous task for adding quiz
     public class AddQuizTask extends AsyncTask {
         @Override
         protected Object doInBackground(Object[] objects) {
             Quiz quiz = (Quiz) objects[0];
-            String link = "http://10.99.30.62/quizzer/add_quiz.php?id=" + quiz.getId() + "&title=" + quiz.getTitle() + "&description=" + quiz.getDescription();
+            String link = "http://10.99.0.116/quizzer/add_quiz.php?id=" + quiz.getId() + "&title=" + quiz.getTitle() + "&description=" + quiz.getDescription();
             //Log.v("link", link);
+
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
+                    .url(link)
+                    .build();
+            try {
+                Response response = client.newCall(request).execute();
+                String result = response.body().string();
+                JSONObject json = new JSONObject(result);
+
+                int success = json.getInt("success");
+
+                if (success == 0) {
+                    Log.v("response:", json.getString("message"));
+                    return new Boolean(false);
+                } else {
+                    Log.v("response", json.getString("message"));
+                    return new Boolean(true);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+
+    //asynchronous task for adding question
+    public class AddQuestionTask extends AsyncTask {
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            Question question = (Question) objects[0];
+            int quiz_id = (int)objects[1];
+            String link = "http://10.99.0.116/quizzer/add_question.php?quiz_id="+quiz_id+"&question="+question.getQuestion()+"&question_type="+question.getQuestionType()+"&option1="+question.getOption1()+"&option2="+question.getOption2()+"&option3="+question.getOption3()+"&option4="+question.getOption4()+"&expected_answer="+question.getExpectedAnswer();
+            Log.v("link", link);
 
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
@@ -90,7 +141,7 @@ public class QuizController {
 
         @Override
         protected Object doInBackground(Object[] objects) {
-            String link = "http://10.99.30.62/quizzer/get_all_quiz.php";
+            String link = "http://10.99.0.116/quizzer/get_all_quiz.php";
 
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
@@ -132,13 +183,66 @@ public class QuizController {
         }
     }
 
+    //asynchronous task for getting all quizzes from server
+    public class GetAllQuestionTask extends AsyncTask {
+        JSONArray questionsJsonArray = null;
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            int quiz_id = (int)objects[0];
+            String link = "http://10.99.0.116/quizzer/get_all_question.php?quiz_id="+quiz_id;
+
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
+                    .url(link)
+                    .build();
+            try {
+                Response response = client.newCall(request).execute();
+                String result = response.body().string();
+
+                JSONObject json = new JSONObject(result);
+
+                int success = json.getInt("success");
+
+                if (success == 0) {
+                    Log.v("response:", json.getString("message"));
+                    return null;
+                } else {
+                    List<Question> questionList = new ArrayList<Question>();
+                    questionsJsonArray = json.getJSONArray("questions");
+
+                    for (int i=0; i < questionsJsonArray.length(); i++){
+                        JSONObject questionJson = questionsJsonArray.getJSONObject(i);
+                        Question question = new Question();
+
+                        //Set quiz object attributes from JSON quiz
+                        question.setQuestion(questionJson.getString("question"));
+                        question.setQuestionType(questionJson.getString("question_type"));
+                        question.setOption1(questionJson.getString("option1"));
+                        question.setOption2(questionJson.getString("option2"));
+                        question.setOption3(questionJson.getString("option3"));
+                        question.setOption4(questionJson.getString("option4"));
+                        question.setExpectedAnswer(questionJson.getString("expected_answer"));
+
+                        //add quiz into List of Quiz
+                        questionList.add(question);
+                    }
+                    return questionList;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+
     //asynchronous task for getting single quiz from title
     public class GetQuizTask extends AsyncTask {
 
         @Override
         protected Object doInBackground(Object[] objects) {
             String quiz_title = (String)objects[0];
-            String link = "http://10.99.30.62/quizzer/get_quiz.php?title="+quiz_title;
+            String link = "http://10.99.0.116/quizzer/get_quiz.php?title="+quiz_title;
 
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()

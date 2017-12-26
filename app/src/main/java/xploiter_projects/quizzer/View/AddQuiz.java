@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import xploiter_projects.quizzer.Controller.QuizController;
 import xploiter_projects.quizzer.Model.Quiz;
@@ -38,9 +39,9 @@ public class AddQuiz extends AppCompatActivity {
 
                 //let the controller handle the communication with server
                 boolean flag = quizController.AddQuiz(quiz);
-                //boolean flag = (boolean) new QuizController().execute(quiz).get();
 
                 Intent intent=new Intent(AddQuiz.this,AddQuestion.class);
+                intent.putExtra("quiz_id", quizid_inp.getText().toString());
                 startActivity(intent);
             }
         });

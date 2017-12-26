@@ -74,8 +74,8 @@ public class Login extends AppCompatActivity {
 
         //MobileAds.initialize(this,"ca-app-pub-2511646558397353~9014565267");
 
-        mAdView = (AdView)findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+//        mAdView = (AdView)findViewById(R.id.adView);
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        mAdView.loadAd(adRequest);
     }
 }

@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="xploiter_projects.quizzer.View.InstructorIndex">
+    tools:context="xploiter_projects.quizzer.View.InstructorIndex"
+    tools:layout_editor_absoluteY="81dp">
 
     <TextView
         android:id="@+id/quizzes_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="7dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
         android:fontFamily="monospace"
         android:text="Quizzes..."
         android:textColor="@color/colorPrimary"
@@ -24,26 +24,24 @@
     <ListView
         android:id="@+id/quiz_list"
         android:layout_width="0dp"
-        android:layout_height="374dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="50dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="55dp"
         android:scrollbars="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/newquiz_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/quizzes_txt" />
 
     <Button
         android:id="@+id/newquiz_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginEnd="7dp"
         android:text="Add New Quiz"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/quiz_list" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

@@ -26,28 +26,31 @@ public class StudentIndex extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_index);
+        try {
+            List<Quiz> quizzes = quizController.getAllQuiz();
 
-        List<Quiz> quizzes = quizController.getAllQuiz();
-
-        for (int i = 0; i < quizzes.size(); i++){
-            quizTitleList.add(quizzes.get(i).getTitle());
-        }
-
-        ArrayAdapter adapter = new ArrayAdapter<String>(this,
-                R.layout.activity_listview, quizTitleList);
-
-        quiz_list = (ListView)findViewById(R.id.quiz_list);
-        quiz_list.setAdapter(adapter);
-
-        quiz_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String item = (String)quiz_list.getItemAtPosition(position);
-                Intent intent=new Intent(StudentIndex.this,ShowQuiz.class);
-                intent.putExtra("quiz_title", item);
-                startActivity(intent);
-                //Toast.makeText(getApplicationContext(), item,Toast.LENGTH_SHORT).show();
+            for (int i = 0; i < quizzes.size(); i++) {
+                quizTitleList.add(quizzes.get(i).getTitle());
             }
-        });
+
+            ArrayAdapter adapter = new ArrayAdapter<String>(this,
+                    R.layout.activity_listview, quizTitleList);
+
+            quiz_list = (ListView) findViewById(R.id.quiz_list);
+            quiz_list.setAdapter(adapter);
+
+            quiz_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    String item = (String) quiz_list.getItemAtPosition(position);
+                    Intent intent = new Intent(StudentIndex.this, ShowQuiz.class);
+                    intent.putExtra("quiz_title", item);
+                    startActivity(intent);
+                    //Toast.makeText(getApplicationContext(), item,Toast.LENGTH_SHORT).show();
+                }
+            });
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
     }
 }
